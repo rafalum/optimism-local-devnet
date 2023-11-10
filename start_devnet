@@ -1,0 +1,16 @@
+#!/bin/bash
+
+DISK=$1.qcow2
+MEMORY=16678
+CORES=4
+
+echo "##### Starting VM #####"
+
+qemu-system-x86_64 -hda $DISK -smp $CORES -m $MEMORY -net user,hostfwd=tcp::10022-:22,hostfwd=tcp::8545-:8545,hostfwd=tcp::9545-:9545 -net nic -display none -daemonize -enable-kvm -cpu host,-svm
+
+sleep 20
+
+PID=$(pgrep qemu-system)
+
+echo "SSH into the VM with: ssh -o IdentitiesOnly=yes sandbox@127.0.0.1 -p 10022"
+echo "PID of VM: $PID"
