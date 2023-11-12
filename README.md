@@ -45,6 +45,7 @@ To start the VM run the bash script `start_devnet` that is provided in this repo
 ```bash
 start_devnet devnet
 ```
+The VM runs with 8GB of RAM and 4 CPUs but depending on your host machine you can change these values in the bash script.
 
 And that's it! You now have a running devnet. You can ssh into the VM using the following command: `ssh sandbox@127.0.0.1 -p 10022`. Password is `sandbox`.
 
@@ -57,3 +58,23 @@ Further you can connect to the Ethereum chain and Optimism chain through the fol
 
 
 ##### Option 2: Build the VM yourself
+
+First, let's create a base disk image that we will base our devnet VM on. This can be done with the following command:
+```bash
+qemu-img create -f qcow2 base_vm.qcow2 80G
+```
+
+Next, we will download the Ubuntu server image. You can also choose a different distribution however this guide is tailored for Ubuntu. Once we have the iso file downloaded, we can start the installation process with the following command:
+```bash
+qemu-system-x86_64 -hda base_vm.qcow2 -cdrom ~/Downloads/ubuntu-22.04.2-live-server-amd64.iso -m 8192
+```
+I recommend setting up a user with the username `sandbox` and password `sandbox` so that the scripts in this repositiory remain compatible.
+
+Now we have Ubuntu installed on the disk image. Let's now create a new fesh VM that contains the Optimism devnet. 
+
+Run the script `create_devnet` that is provided in this repository which will install all the required dependencies. The first argument is our base disk image and the second argument is the name of the new VM:
+```bash
+create_devnet base_vm devnet
+```
+
+Congrats! We have just created our own running devnet.
