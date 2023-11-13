@@ -11,7 +11,7 @@ If you follow this guide, you end up with a virtual machine that contains the wh
 
 ## Prerequisites
  
-#### 1. QEMU and KVM
+### 1. QEMU and KVM
 
 Assuming you have a virtualizable system (most are nowadays) you can install QEMU with the following commands:
 ```bash
@@ -33,11 +33,11 @@ sudo usermod -aG libvirt $USER
 
 For a more complete installation guide, see [here](https://www.tecmint.com/install-qemu-kvm-ubuntu-create-virtual-machines/).
 
-#### 2. Start the devnet
+### 2. Start the devnet
 
 Now you have two options: you can either use a prebuilt VM that contains all the necessary components or you can build the VM yourself. The prebuilt VM is the easiest option, but it is also the least flexible and might not have the most up-to-date version of the devnet. If you want to customize the devnet, you should build the VM yourself.
 
-##### Option 1: Use a prebuilt VM
+#### Option 1: Use a prebuilt VM (Easy)
 
 Download the prebuit VM [here](https://polybox.ethz.ch/index.php/s/7ispNzwvvpJqTqv). The password for the download is sandbox. Once downloaded you have a file called devnet.qcow2. This is the VM image that contains a light weight Ubuntu server and all the necessary components of the Optimism ecosystem.
 
@@ -45,7 +45,7 @@ To start the VM run the bash script `start_devnet` that is provided in this repo
 ```bash
 start_devnet devnet
 ```
-The VM runs with 8GB of RAM and 4 CPUs but depending on your host machine you can change these values in the bash script.
+The VM runs with 16GB of RAM and 4 CPUs but depending on your host machine you can change these values in the bash script.
 
 And that's it! You now have a running devnet. You can ssh into the VM using the following command: `ssh sandbox@127.0.0.1 -p 10022`. Password is `sandbox`.
 
@@ -57,7 +57,7 @@ Further you can connect to the Ethereum chain and Optimism chain through the fol
 | L2    | 9545     |
 
 
-##### Option 2: Build the VM yourself
+#### Option 2: Build the VM yourself (More flexible)
 
 First, let's create a base disk image that we will base our devnet VM on. This can be done with the following command:
 ```bash

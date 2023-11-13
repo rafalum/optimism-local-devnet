@@ -2,7 +2,7 @@
 
 IMAGE=$1.qcow2
 DISK=$2.qcow2
-MEMORY=8192
+MEMORY=16384
 CORES=4
 
 echo "##### Creating VM #####"
